@@ -18,7 +18,8 @@ The goal is to demonstrate my technical skills in frontend architecture, UI/UX, 
 - [x] Use a CSS framework or build your own  
 - [x] Clean and scalable code  
 - [x] Responsive UI  
-- [ ] Sort items
+- [X] Sort items
+- [X] Optimizing rendering (useMemo, useRef...)
 - [ ] Filter items
 - [ ] Create items
 - [ ] Update items  

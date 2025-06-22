@@ -4,12 +4,15 @@ import { Alignment } from '@/types/superhero.types'
 import { useDrawerStore } from '@/stores/use-drawer-store'
 import type { SuperheroesTableProps } from './types'
 import Badge from '@/components/ui/badge'
+import { useSortingStore } from '@/stores/use-sorting-store'
+import { SortBy } from '@/stores/use-sorting-store/types'
 
 export default function SuperheroesTable({
   superheroes,
   onDelete
 }: SuperheroesTableProps) {
   const { openDrawer } = useDrawerStore()
+  const { toggleSorting } = useSortingStore()
 
   return (
     <div className="sm:p-4 min-w-full inline-block">
@@ -21,7 +24,10 @@ export default function SuperheroesTable({
                 scope="col"
                 className="sticky top-0 z-10 border-b border-gray-300 py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-gray-700 sm:pl-6 bg-white/90 backdrop-blur-sm backdrop-filter"
               >
-                <a href="#" className="group inline-flex">
+                <a
+                  className="group inline-flex cursor-pointer"
+                  onClick={() => toggleSorting(SortBy.NAME)}
+                >
                   Name
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
                     <ChevronDownIcon aria-hidden="true" className="size-5" />
@@ -32,7 +38,10 @@ export default function SuperheroesTable({
                 scope="col"
                 className="sticky top-0 z-10 border-b border-gray-300 w-26 sm:w-44 lg:w-52 px-3 py-3.5 text-left text-sm font-semibold text-gray-700 bg-white/90 backdrop-blur-sm backdrop-filter"
               >
-                <a href="#" className="group inline-flex">
+                <a
+                  className="group inline-flex cursor-pointer"
+                  onClick={() => toggleSorting(SortBy.PUBLISHER)}
+                >
                   Publisher
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
                     <ChevronDownIcon aria-hidden="true" className="size-5" />
@@ -49,7 +58,10 @@ export default function SuperheroesTable({
                 scope="col"
                 className="sticky top-0 z-10 border-b border-gray-300 w-32 hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-700 md:table-cell bg-white/90 backdrop-blur-sm backdrop-filter"
               >
-                <a href="#" className="group inline-flex">
+                <a
+                  className="group inline-flex cursor-pointer"
+                  onClick={() => toggleSorting(SortBy.GENDER)}
+                >
                   Gender
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
                     <ChevronDownIcon aria-hidden="true" className="size-5" />
@@ -60,7 +72,10 @@ export default function SuperheroesTable({
                 scope="col"
                 className="sticky top-0 z-10 border-b border-gray-300 w-32 hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-700 sm:table-cell bg-white/90 backdrop-blur-sm backdrop-filter"
               >
-                <a href="#" className="group inline-flex">
+                <a
+                  className="group inline-flex cursor-pointer"
+                  onClick={() => toggleSorting(SortBy.ALIGNMENT)}
+                >
                   Alignment
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
                     <ChevronDownIcon aria-hidden="true" className="size-5" />

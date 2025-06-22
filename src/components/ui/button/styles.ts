@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority'
 
 export const styles = cva(
-  'items-center justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer',
+  'inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer',
   {
     variants: {
       variant: {
