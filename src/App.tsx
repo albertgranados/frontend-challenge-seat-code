@@ -73,6 +73,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center min-h-screen max-w-screen w-full">
+      <h1 className="text-2xl font-bold pb-4 pt-8">The Superhero List</h1>
       <FiltersBar />
       <SuperheroesTable
         superheroes={sortedSuperheroes}

@@ -15,7 +15,7 @@ export default function SuperheroesTable({
   const { sorting, toggleSorting, sortingOrder } = useSortingStore()
 
   return (
-    <div className="sm:p-4 min-w-full inline-block">
+    <div className="py-4 sm:p-4 min-w-full inline-block">
       <div className="ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg overflow-hidden min-w-full overflow-y-auto max-h-[600px]">
         <table className="table-fixed w-full border-separate border-spacing-0 divide-y divide-gray-300">
           <thead>

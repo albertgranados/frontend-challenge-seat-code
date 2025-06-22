@@ -63,7 +63,8 @@ export default function SuperheroDetails() {
               Aliases
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-              {selectedSuperhero?.biography.aliases.length ? (
+              {selectedSuperhero?.biography.aliases.length &&
+              selectedSuperhero?.biography.aliases[0] !== '-' ? (
                 <ul className="list-disc pl-5">
                   {selectedSuperhero?.biography.aliases.map((alias, index) => (
                     <li key={index} className="text-gray-900">
@@ -72,7 +73,7 @@ export default function SuperheroDetails() {
                   ))}
                 </ul>
               ) : (
-                'No aliases available'
+                'No aliases known'
               )}
             </dd>
           </div>
@@ -142,7 +143,7 @@ export default function SuperheroDetails() {
               )}
               {selectedSuperhero?.powerstats.power && (
                 <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Speed</dt>
+                  <dt className="text-gray-500">Power</dt>
                   <dd className="flex w-full items-center max-w-[50%]">
                     <ProgressBar
                       value={selectedSuperhero?.powerstats.power || 0}
