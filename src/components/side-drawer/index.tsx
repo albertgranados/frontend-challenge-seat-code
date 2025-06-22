@@ -1,12 +1,23 @@
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import { ArrowLeft, PencilIcon, SaveIcon, TrashIcon, X } from 'lucide-react'
+import {
+  ArrowLeft,
+  CheckIcon,
+  PencilIcon,
+  SaveIcon,
+  TrashIcon,
+  X
+} from 'lucide-react'
 import { useDrawerStore } from '@/stores/use-drawer-store'
-import SuperheroDetails from './content/superhero-details'
-import NewSuperheroForm from './content/new-superhero-form'
 import Button from '../ui/button'
 import type { SideDrawerProps } from './types'
+import SuperheroForm from '@/components/side-drawer/content/superhero-form'
+import SuperheroDetails from '@/components/side-drawer/content/superhero-details'
 
-export default function SideDrawer({ deleteSuperhero }: SideDrawerProps) {
+export default function SideDrawer({
+  handleCreateSuperhero,
+  handleEditSuperhero,
+  deleteSuperhero
+}: SideDrawerProps) {
   const {
     selectedSuperhero,
     isDrawerOpen,
@@ -16,6 +27,7 @@ export default function SideDrawer({ deleteSuperhero }: SideDrawerProps) {
   } = useDrawerStore()
 
   const isEditing = selectedSuperhero !== null && drawerType === 'form'
+  const isNewSuperhero = selectedSuperhero === null && drawerType === 'form'
 
   return (
     <Dialog open={isDrawerOpen} onClose={closeDrawer} className="relative z-10">
@@ -69,7 +81,7 @@ export default function SideDrawer({ deleteSuperhero }: SideDrawerProps) {
                       </h2>
                     </div>
                     <div className="ml-3 flex h-7 items-center gap-2 sm:gap-4">
-                      {!isEditing && (
+                      {!isEditing && !isNewSuperhero && (
                         <Button
                           variant="secondary"
                           onClick={async () => {
@@ -86,22 +98,34 @@ export default function SideDrawer({ deleteSuperhero }: SideDrawerProps) {
                       )}
                       <Button
                         onClick={
-                          isEditing
-                            ? undefined
-                            : () => {
-                                deleteSuperhero(selectedSuperhero?.id || -1)
+                          isNewSuperhero
+                            ? () => {
+                                handleCreateSuperhero()
                                 closeDrawer()
                               }
+                            : isEditing
+                              ? () => {
+                                  handleEditSuperhero(selectedSuperhero)
+                                  closeDrawer()
+                                }
+                              : () => {
+                                  deleteSuperhero(selectedSuperhero?.id || -1)
+                                  closeDrawer()
+                                }
                         }
                       >
                         <span className="sr-only">Delete superhero</span>
                         <span className="inline-flex items-center">
-                          {isEditing ? (
+                          {isNewSuperhero ? (
+                            <CheckIcon aria-hidden="true" className="size-5" />
+                          ) : isEditing ? (
                             <SaveIcon aria-hidden="true" className="size-5" />
                           ) : (
                             <TrashIcon aria-hidden="true" className="size-5" />
                           )}
-                          {isEditing ? (
+                          {isNewSuperhero ? (
+                            <span className="hidden ml-2 sm:block">Create</span>
+                          ) : isEditing ? (
                             <span className="hidden ml-2 sm:block">Save</span>
                           ) : (
                             <span className="hidden ml-2 sm:block">Delete</span>
@@ -114,7 +138,7 @@ export default function SideDrawer({ deleteSuperhero }: SideDrawerProps) {
                 {drawerType === 'details' ? (
                   <SuperheroDetails />
                 ) : (
-                  <NewSuperheroForm />
+                  <SuperheroForm />
                 )}
               </div>
             </DialogPanel>
