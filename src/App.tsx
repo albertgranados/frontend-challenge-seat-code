@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { type Superhero } from '@/types/superhero.types'
-import SuperheroesTable from '@/components/superheroes-table'
 import shuffleArray from '@/utils/shuffle-array'
 import SideDrawer from '@/components/side-drawer'
-import { useDrawerStore } from '@/stores/use-drawer-store'
-import Button from '@/components/ui/button'
 import { SortBy, SortOrder } from '@/stores/use-sorting-store/types'
-import { useSortingStore } from './stores/use-sorting-store'
+import { useSortingStore } from '@/stores/use-sorting-store'
+import FiltersBar from '@/components/filters-bar'
+import SuperheroesTable from '@/components/superheroes-table'
+import { useFilterStore } from './stores/use-filter-store'
 
 export default function App() {
   const [superheroes, setSuperheroes] = useState<Superhero[]>([])
-  const { openDrawer } = useDrawerStore()
   const { sorting, sortingOrder } = useSortingStore()
+  const { filter } = useFilterStore()
 
   useEffect(() => {
     fetch('https://akabab.github.io/superhero-api/api/all.json')
@@ -22,7 +22,19 @@ export default function App() {
       })
   }, [])
 
-  const filteredSuperheroes = superheroes
+  const filteredSuperheroes = useMemo(() => {
+    console.log('calculate filteredUsers')
+    return filter != null && filter.length > 0
+      ? superheroes.filter((superhero) => {
+          return (
+            superhero.name.toLowerCase().includes(filter.toLowerCase()) ||
+            superhero.biography.fullName
+              .toLowerCase()
+              .includes(filter.toLowerCase())
+          )
+        })
+      : superheroes
+  }, [superheroes, filter])
 
   const sortedSuperheroes = useMemo(() => {
     if (!filteredSuperheroes || filteredSuperheroes.length === 0) return []
@@ -61,7 +73,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center min-h-screen max-w-screen w-full">
-      <Button onClick={() => openDrawer('form')}>New superhero</Button>
+      <FiltersBar />
       <SuperheroesTable
         superheroes={sortedSuperheroes}
         onDelete={(id) => deleteSuperhero(id)}

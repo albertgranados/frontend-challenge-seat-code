@@ -20,7 +20,7 @@ The goal is to demonstrate my technical skills in frontend architecture, UI/UX, 
 - [x] Responsive UI  
 - [X] Sort items
 - [X] Optimizing rendering (useMemo, useRef...)
-- [ ] Filter items
+- [X] Filter items
 - [ ] Create items
 - [ ] Update items  
 - [ ] Use asynchronous views (loading, error, etc.)  
