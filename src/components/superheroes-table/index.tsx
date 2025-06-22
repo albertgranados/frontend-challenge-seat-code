@@ -1,11 +1,16 @@
-import classNames from '@/utils/class-names'
-import type { SuperheroesTableProps } from './types'
-import { Alignment } from '@/types/superhero.types'
 import { ChevronDownIcon, TrashIcon } from 'lucide-react'
+import classNames from '@/utils/class-names'
+import { Alignment } from '@/types/superhero.types'
+import { useDrawerStore } from '@/stores/use-drawer-store'
+import type { SuperheroesTableProps } from './types'
+import Badge from '@/components/ui/badge'
 
 export default function SuperheroesTable({
-  superheroes
+  superheroes,
+  onDelete
 }: SuperheroesTableProps) {
+  const { openDrawer } = useDrawerStore()
+
   return (
     <div className="sm:p-4 min-w-full inline-block">
       <div className="ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg overflow-hidden min-w-full overflow-y-auto max-h-[600px]">
@@ -72,7 +77,11 @@ export default function SuperheroesTable({
           </thead>
           <tbody>
             {superheroes.map((superhero, index) => (
-              <tr key={superhero.id} className="group even:bg-gray-50">
+              <tr
+                key={superhero.id}
+                className="group even:bg-gray-50"
+                onClick={() => openDrawer('details', superhero)}
+              >
                 <td
                   className={classNames(
                     index === 0 ? '' : 'border-t border-gray-200',
@@ -123,7 +132,9 @@ export default function SuperheroesTable({
                     'hidden px-3 py-3.5 text-sm text-gray-500 md:table-cell group-hover:bg-gray-200 cursor-pointer'
                   )}
                 >
-                  {superhero.appearance.gender || '-'}
+                  <Badge variant="inactive">
+                    {superhero.appearance.gender}
+                  </Badge>
                 </td>
                 <td
                   className={classNames(
@@ -132,19 +143,13 @@ export default function SuperheroesTable({
                   )}
                 >
                   {superhero.biography.alignment === Alignment.Good && (
-                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
-                      Good
-                    </span>
+                    <Badge variant="positive">Good</Badge>
                   )}
                   {superhero.biography.alignment === Alignment.Bad && (
-                    <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20 ring-inset">
-                      Bad
-                    </span>
+                    <Badge variant="negative">Bad</Badge>
                   )}
                   {superhero.biography.alignment === Alignment.Neutral && (
-                    <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20 ring-inset">
-                      Neutral
-                    </span>
+                    <Badge variant="neutral">Neutral</Badge>
                   )}
                   {superhero.biography.alignment === Alignment.Empty && (
                     <span>-</span>
@@ -159,6 +164,10 @@ export default function SuperheroesTable({
                   <button
                     type="button"
                     className="inline-flex gap-1 items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-700 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onDelete(superhero.id)
+                    }}
                   >
                     <TrashIcon className="size-4" />
                     <span className="hidden sm:block">Delete</span>
