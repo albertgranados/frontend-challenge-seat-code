@@ -1,18 +1,18 @@
-import { ChevronDownIcon, TrashIcon } from 'lucide-react'
+import { ChevronDownIcon, ChevronsUpDown, TrashIcon } from 'lucide-react'
 import classNames from '@/utils/class-names'
 import { Alignment } from '@/types/superhero.types'
 import { useDrawerStore } from '@/stores/use-drawer-store'
 import type { SuperheroesTableProps } from './types'
 import Badge from '@/components/ui/badge'
 import { useSortingStore } from '@/stores/use-sorting-store'
-import { SortBy } from '@/stores/use-sorting-store/types'
+import { SortBy, SortOrder } from '@/stores/use-sorting-store/types'
 
 export default function SuperheroesTable({
   superheroes,
   onDelete
 }: SuperheroesTableProps) {
   const { openDrawer } = useDrawerStore()
-  const { toggleSorting } = useSortingStore()
+  const { sorting, toggleSorting, sortingOrder } = useSortingStore()
 
   return (
     <div className="sm:p-4 min-w-full inline-block">
@@ -30,7 +30,22 @@ export default function SuperheroesTable({
                 >
                   Name
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
-                    <ChevronDownIcon aria-hidden="true" className="size-5" />
+                    {sorting === SortBy.NAME ? (
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className={classNames(
+                          'size-5 transition-transform duration-200',
+                          sortingOrder === SortOrder.DESCENDING && 'rotate-180'
+                        )}
+                      />
+                    ) : (
+                      <ChevronsUpDown
+                        aria-hidden="true"
+                        className={classNames(
+                          'w-5 h-5 transition-transform duration-200 p-0.5'
+                        )}
+                      />
+                    )}
                   </span>
                 </a>
               </th>
@@ -44,7 +59,22 @@ export default function SuperheroesTable({
                 >
                   Publisher
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
-                    <ChevronDownIcon aria-hidden="true" className="size-5" />
+                    {sorting === SortBy.PUBLISHER ? (
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className={classNames(
+                          'size-5 transition-transform duration-200',
+                          sortingOrder === SortOrder.DESCENDING && 'rotate-180'
+                        )}
+                      />
+                    ) : (
+                      <ChevronsUpDown
+                        aria-hidden="true"
+                        className={classNames(
+                          'w-5 h-5 transition-transform duration-200 p-0.5'
+                        )}
+                      />
+                    )}
                   </span>
                 </a>
               </th>
@@ -64,7 +94,22 @@ export default function SuperheroesTable({
                 >
                   Gender
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
-                    <ChevronDownIcon aria-hidden="true" className="size-5" />
+                    {sorting === SortBy.GENDER ? (
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className={classNames(
+                          'size-5 transition-transform duration-200',
+                          sortingOrder === SortOrder.DESCENDING && 'rotate-180'
+                        )}
+                      />
+                    ) : (
+                      <ChevronsUpDown
+                        aria-hidden="true"
+                        className={classNames(
+                          'w-5 h-5 transition-transform duration-200 p-0.5'
+                        )}
+                      />
+                    )}
                   </span>
                 </a>
               </th>
@@ -78,7 +123,22 @@ export default function SuperheroesTable({
                 >
                   Alignment
                   <span className="ml-2 flex-none rounded-sm bg-gray-100 text-gray-900 group-hover:bg-gray-200">
-                    <ChevronDownIcon aria-hidden="true" className="size-5" />
+                    {sorting === SortBy.ALIGNMENT ? (
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className={classNames(
+                          'size-5 transition-transform duration-200',
+                          sortingOrder === SortOrder.DESCENDING && 'rotate-180'
+                        )}
+                      />
+                    ) : (
+                      <ChevronsUpDown
+                        aria-hidden="true"
+                        className={classNames(
+                          'w-5 h-5 transition-transform duration-200 p-0.5'
+                        )}
+                      />
+                    )}
                   </span>
                 </a>
               </th>
