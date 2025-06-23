@@ -12,20 +12,28 @@ import { useFormStore } from './stores/use-form-store'
 
 export default function App() {
   const [superheroes, setSuperheroes] = useState<Superhero[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const { sorting, sortingOrder } = useSortingStore()
   const { filter } = useFilterStore()
   const { createSuperhero, editSuperhero } = useFormStore()
 
   useEffect(() => {
+    setIsLoading(true)
     fetch('https://akabab.github.io/superhero-api/api/all.json')
       .then((res) => res.json())
       .then((json: Superhero[]) => {
         setSuperheroes(shuffleArray(json).slice(0, 100))
       })
+      .catch(() => {
+        setError('Failed to fetch superheroes. Try again later.')
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [])
 
   const filteredSuperheroes = useMemo(() => {
-    console.log('calculate filteredUsers')
     return filter != null && filter.length > 0
       ? superheroes.filter((superhero) => {
           return (
@@ -93,6 +101,8 @@ export default function App() {
       <FiltersBar />
       <SuperheroesTable
         superheroes={sortedSuperheroes}
+        isLoading={isLoading}
+        error={error}
         onDelete={(id) => deleteSuperhero(id)}
       />
       <SideDrawer
