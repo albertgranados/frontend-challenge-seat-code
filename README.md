@@ -1,29 +1,29 @@
-# 🦸 Superheroes DataTable App
+# 🦸 The Superhero List
 
 This project is a code challenge solution built with React + TypeScript.  
-It displays a list of Marvel Comics superheroes and allows the user to search, sort, select an item to view in showcase format, and simulate CRUD operations.  
+It displays a list of superheroes and allows the user to search, sort, select an item to view in showcase format, and simulate CRUD operations.  
 The goal is to demonstrate my technical skills in frontend architecture, UI/UX, and clean code.
 
 ---
 
 ## ✅ Requirements Checklist
 
-- [x] Use a public API or mock your own with JSON Server  
-- [x] React client that consumes the API  
-- [x] Display a list of items  
-- [x] Show item detail in a "showcase" format 
-- [x] Delete items 
-- [x] Use a State Manager (Zustand)  
-- [x] Use TypeScript  
-- [x] Use a CSS framework or build your own  
-- [x] Clean and scalable code  
-- [x] Responsive UI  
-- [x] Sort items
-- [x] Optimizing rendering (useMemo, useRef...)
-- [x] Filter items
-- [x] Create items
-- [x] Update items  
-- [ ] Use asynchronous views (loading, error, etc.)  
+- ✅ Use a public API or mock your own with JSON Server  
+- ✅ React client that consumes the API  
+- ✅ Display a list of items  
+- ✅ Show item detail in a "showcase" format 
+- ✅ Delete items 
+- ✅ Use a State Manager (Zustand)  
+- ✅ Use TypeScript  
+- ✅ Use a CSS framework or build your own  
+- ✅ Clean and scalable code  
+- ✅ Responsive UI  
+- ✅ Sort items
+- ✅ Optimizing rendering (useMemo, useRef...)
+- ✅ Filter items
+- ✅ Create items
+- ✅ Update items  
+- ✅ Use asynchronous views (loading, error, etc.)  
 
 - [ ] Unit Testing (optional)  
 
