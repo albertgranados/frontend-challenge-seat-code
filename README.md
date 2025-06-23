@@ -25,8 +25,6 @@ The goal is to demonstrate my technical skills in frontend architecture, UI/UX, 
 - ✅ Update items  
 - ✅ Use asynchronous views (loading, error, etc.)  
 
-- [ ] Unit Testing (optional)  
-
 ---
 
 ## 🛠️ How to Run the Project
@@ -107,6 +105,27 @@ src/
 ├── utils/          # Utility functions
 └── styles/         # Tailwind config & custom styles
 ```
+---
+
+## 📝 Notes & Key Design Decisions
+
+1. **Data limited to 100 superheroes**  
+   I’ve intentionally limited the dataset to 100 randomly selected superheroes on each page load. This helps focus the challenge on core features like search, sorting, creation, and selection, while avoiding unnecessary complexity (pagination, performance issues, etc.). Randomization adds variety each time the app is refreshed.
+
+2. **UI strategy: Headless UI for drawer, self-built Tailwind components for the rest**  
+   The drawer component uses `@headlessui/react` to speed up development and ensure accessibility. All other components (such as the table) were built manually with Tailwind CSS, following Tailwind UI aesthetics. This demonstrates my ability to structure and style UI elements from scratch.
+
+3. **Performance optimizations with useMemo**  
+   `useMemo` is used in key parts of the app (like filtering and sorting) to avoid unnecessary recalculations and re-renders, keeping performance smooth and efficient even as data changes.
+
+4. **Responsive design**  
+   The app is fully responsive and can be tested comfortably on a mobile device. Special care has been taken to ensure a good mobile experience.
+
+5. **CRUD and filters: simplified but scalable**  
+   Some features like creation and editing have been implemented in a minimal form (e.g., editing/creating only the name field). This is intentional to show functionality while managing time efficiently. The system is built to scale—adding more fields or filters would be straightforward given the current structure.
+
+6. **Room for improvement: custom hooks and logic extraction**  
+   Some logic inside `App.tsx` could have been abstracted into a custom hook to improve separation of concerns. Due to time constraints, this was left as-is, but I acknowledge it as a refactor opportunity. Also, deletion, edition and creation confirmation dialogs addition.
 
 ---
 
