@@ -8,8 +8,7 @@ export default function SuperheroForm() {
   const { name, setName } = useFormStore()
 
   useEffect(() => {
-    if (selectedSuperhero) setName(selectedSuperhero.name || '')
-    else setName('')
+    setName(selectedSuperhero?.name ?? '')
   }, [selectedSuperhero, setName])
 
   return (
@@ -23,7 +22,6 @@ export default function SuperheroForm() {
         label="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        defaultValue={selectedSuperhero?.name || ''}
       />
     </form>
   )

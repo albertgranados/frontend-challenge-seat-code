@@ -182,12 +182,17 @@ export default function SuperheroesTable({
                     )}
                   >
                     <div className="flex items-center gap-4">
-                      <div className="size-11 shrink-0">
-                        <img
-                          alt=""
-                          src={superhero.images.sm}
-                          className="size-11 rounded-full object-cover"
-                        />
+                      <div className="size-11 shrink-0 rounded-full bg-slate-100 overflow-hidden">
+                        {superhero.images.sm && (
+                          <img
+                            alt={`${superhero.name} avatar`}
+                            src={superhero.images.sm}
+                            className="size-11 object-cover opacity-0 transition-opacity duration-300"
+                            onLoad={(e) =>
+                              e.currentTarget.classList.add('opacity-100')
+                            }
+                          />
+                        )}
                       </div>
                       <div className="flex flex-col">
                         <span className="font-medium text-gray-700">

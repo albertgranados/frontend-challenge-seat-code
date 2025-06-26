@@ -10,12 +10,14 @@ export default function SuperheroDetails() {
       <div className="pb-1 sm:pb-6">
         <div>
           <div className="relative h-60 sm:h-72 bg-gray-50">
-            <img
-              alt={selectedSuperhero?.name + `'s cover`}
-              src={selectedSuperhero?.images.lg}
-              onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
-              className="absolute size-full object-cover opacity-0 transition-opacity duration-300"
-            />
+            {selectedSuperhero?.images.lg && (
+              <img
+                alt={selectedSuperhero.name + `'s cover`}
+                src={selectedSuperhero.images.lg}
+                onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
+                className="absolute size-full object-cover opacity-0 transition-opacity duration-300"
+              />
+            )}
           </div>
           <div className="mt-6 px-8 sm:mt-8 sm:flex sm:items-end sm:px-6">
             <div className="sm:flex-1">
