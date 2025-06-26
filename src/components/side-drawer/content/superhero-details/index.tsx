@@ -58,25 +58,29 @@ export default function SuperheroDetails() {
               </p>
             </dd>
           </div>
-          <div>
-            <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
-              Aliases
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-              {selectedSuperhero?.biography.aliases.length &&
-              selectedSuperhero?.biography.aliases[0] !== '-' ? (
-                <ul className="list-disc pl-5">
-                  {selectedSuperhero?.biography.aliases.map((alias, index) => (
-                    <li key={index} className="text-gray-900">
-                      {alias}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                'No aliases known'
-              )}
-            </dd>
-          </div>
+          {selectedSuperhero?.biography?.aliases && (
+            <div>
+              <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
+                Aliases
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
+                {selectedSuperhero.biography.aliases.length &&
+                selectedSuperhero.biography.aliases[0] !== '-' ? (
+                  <ul className="list-disc pl-5">
+                    {selectedSuperhero?.biography.aliases.map(
+                      (alias, index) => (
+                        <li key={index} className="text-gray-900">
+                          {alias}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                ) : (
+                  'No aliases known'
+                )}
+              </dd>
+            </div>
+          )}
           <div className="flex flex-row items-start gap-4">
             <div>
               <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:shrink-0">
@@ -109,70 +113,72 @@ export default function SuperheroDetails() {
               </dd>
             </div>
           </div>
-          <div>
-            <dl className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
-              {selectedSuperhero?.powerstats.combat && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Combat</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.combat || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-              {selectedSuperhero?.powerstats.durability && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Durability</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.durability || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-              {selectedSuperhero?.powerstats.intelligence && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Intelligence</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.intelligence || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-              {selectedSuperhero?.powerstats.power && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Power</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.power || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-              {selectedSuperhero?.powerstats.speed && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Speed</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.speed || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-              {selectedSuperhero?.powerstats.strength && (
-                <div className="flex justify-between py-3 text-sm font-medium">
-                  <dt className="text-gray-500">Strength</dt>
-                  <dd className="flex w-full items-center max-w-[50%]">
-                    <ProgressBar
-                      value={selectedSuperhero?.powerstats.strength || 0}
-                    />
-                  </dd>
-                </div>
-              )}
-            </dl>
-          </div>
+          {selectedSuperhero?.powerstats && (
+            <div>
+              <dl className="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
+                {selectedSuperhero?.powerstats.combat && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Combat</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.combat || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+                {selectedSuperhero?.powerstats.durability && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Durability</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.durability || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+                {selectedSuperhero?.powerstats.intelligence && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Intelligence</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.intelligence || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+                {selectedSuperhero?.powerstats.power && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Power</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.power || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+                {selectedSuperhero?.powerstats.speed && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Speed</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.speed || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+                {selectedSuperhero?.powerstats.strength && (
+                  <div className="flex justify-between py-3 text-sm font-medium">
+                    <dt className="text-gray-500">Strength</dt>
+                    <dd className="flex w-full items-center max-w-[50%]">
+                      <ProgressBar
+                        value={selectedSuperhero?.powerstats.strength || 0}
+                      />
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          )}
         </dl>
       </div>
     </div>

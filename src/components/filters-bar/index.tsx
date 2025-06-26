@@ -2,16 +2,15 @@ import { useDrawerStore } from '@/stores/use-drawer-store'
 import Button from '@/components/ui/button'
 import Input from '@/components/ui/input'
 import { SearchIcon } from 'lucide-react'
-import { useFilterStore } from '@/stores/use-filter-store'
+import type { FiltersBarProps } from './types'
 
-export default function FiltersBar() {
+export default function FiltersBar({ handleSetFilter }: FiltersBarProps) {
   const { openDrawer } = useDrawerStore()
-  const { setFilter } = useFilterStore()
 
   return (
     <div className="flex w-full justify-between gap-4 px-4 pt-6 ">
       <Input
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={(e) => handleSetFilter(e.target.value)}
         type="text"
         name="search"
         id="search"

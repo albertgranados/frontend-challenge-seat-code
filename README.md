@@ -8,22 +8,23 @@ The goal is to demonstrate my technical skills in frontend architecture, UI/UX, 
 
 ## ✅ Requirements Checklist
 
-- ✅ Use a public API or mock your own with JSON Server  
-- ✅ React client that consumes the API  
-- ✅ Display a list of items  
-- ✅ Show item detail in a "showcase" format 
-- ✅ Delete items 
-- ✅ Use a State Manager (Zustand)  
-- ✅ Use TypeScript  
-- ✅ Use a CSS framework or build your own  
-- ✅ Clean and scalable code  
-- ✅ Responsive UI  
+- ✅ Use a public API or mock your own with JSON Server
+- ✅ React client that consumes the API
+- ✅ Display a list of items
+- ✅ Show item detail in a "showcase" format
+- ✅ Delete items
+- ✅ Use a State Manager (Zustand)
+- ✅ Use TypeScript
+- ✅ Use a CSS framework or build your own
+- ✅ Clean and scalable code
+- ✅ Responsive UI
 - ✅ Sort items
 - ✅ Optimizing rendering (useMemo, useRef...)
 - ✅ Filter items
 - ✅ Create items
-- ✅ Update items  
-- ✅ Use asynchronous views (loading, error, etc.)  
+- ✅ Update items
+- ✅ Use asynchronous views (loading, error, etc.)
+- ✅ Testing on critical flows
 
 ---
 
@@ -103,8 +104,10 @@ src/
 ├── store/          # Zustand store for state management
 ├── types/          # TypeScript types (e.g. superhero.types.ts)
 ├── utils/          # Utility functions
+├── hooks/          # Custom utility hooks
 └── styles/         # Tailwind config & custom styles
 ```
+
 ---
 
 ## 📝 Notes & Key Design Decisions
@@ -126,6 +129,12 @@ src/
 
 6. **Room for improvement: custom hooks and logic extraction**  
    Some logic inside `App.tsx` could have been abstracted into a custom hook to improve separation of concerns. Due to time constraints, this was left as-is, but I acknowledge it as a refactor opportunity. Also, deletion, edition and creation confirmation dialogs addition.
+
+7. **Testing focused on critical flows**
+
+- Unit tests validate the core logic inside the helper functions `filterSuperheroesTable()` and `sortSuperheroesTable()`. These tests cover various scenarios, including filtering by name and sorting both in ascending (A–Z) and descending (Z–A) order.
+- Integration tests simulate real user interactions using React Testing Library. They check that the search input filters the table, clicking column headers reorders the list, the drawer allows creating and editing a superhero, and the delete button removes it (deletion is stubbed).
+- I focused on testing the five most important actions: filtering, sorting, creating, editing, and deleting, because they represent the main value of the app. Full code coverage wasn’t the priority.
 
 ---
 
